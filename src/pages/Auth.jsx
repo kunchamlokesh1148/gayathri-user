@@ -4,6 +4,38 @@ import { useAuth } from '../context/AuthContext';
 import { Store, Lock, Eye, EyeOff, User, MapPin, Phone, Mail } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress } from '../services/db';
 
+/**
+ * Maps any Firebase auth error code/message to a professional user-friendly string.
+ * This acts as a final safety net in the UI layer — the primary mapping is in auth.js.
+ * Raw Firebase errors are never shown to users; they are only logged to the console.
+ */
+const mapAuthErrorMessage = (raw = '') => {
+  const t = raw.toLowerCase();
+  if (t.includes('invalid-credential') || t.includes('wrong-password') || t.includes('invalid-email') || t.includes('auth/invalid')) {
+    return 'Invalid credentials. Please check your email and password and try again.';
+  }
+  if (t.includes('user-not-found')) {
+    return 'No account found with the provided credentials.';
+  }
+  if (t.includes('email-already-in-use')) {
+    return 'An account with this email already exists.';
+  }
+  if (t.includes('weak-password')) {
+    return 'Password must be at least 6 characters long.';
+  }
+  if (t.includes('network-request-failed') || t.includes('network error')) {
+    return 'Network error. Please check your internet connection and try again.';
+  }
+  if (t.includes('too-many-requests') || t.includes('too-many-login-attempts')) {
+    return 'Too many failed login attempts. Please try again later.';
+  }
+  // If the message is already friendly (doesn't look like a Firebase code), return it as-is
+  if (raw && !t.includes('firebase') && !t.includes('auth/') && raw.length < 200) {
+    return raw;
+  }
+  return 'Something went wrong. Please try again.';
+};
+
 export default function Auth() {
   const { user, login, register } = useAuth();
   const navigate = useNavigate();
@@ -274,7 +306,10 @@ export default function Auth() {
         navigate(from, { replace: true });
       }, 1000);
     } catch (err) {
-      setError(err.message || 'Login failed. Please check credentials.');
+      // All Firebase errors are already mapped in auth.js service, but
+      // we add a final safety net here in case any raw message leaks through.
+      console.error('[Auth] Login error:', err);
+      setError(mapAuthErrorMessage(err.message || err.code || ''));
     } finally {
       setLoading(false);
     }
@@ -331,7 +366,8 @@ export default function Auth() {
         navigate(from, { replace: true });
       }, 1000);
     } catch (err) {
-      setError(err.message || 'Registration failed.');
+      console.error('[Auth] Registration error:', err);
+      setError(mapAuthErrorMessage(err.message || err.code || ''));
     } finally {
       setLoading(false);
     }
