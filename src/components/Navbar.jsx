@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { Search, ShoppingCart, User, LogOut, Store, ChevronDown, HelpCircle } from 'lucide-react';
@@ -10,6 +10,9 @@ export default function Navbar({ onHelpClick }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === '/auth' || (location.pathname === '/' && !user);
 
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -37,29 +40,33 @@ export default function Navbar({ onHelpClick }) {
           </Link>
 
           {/* Desktop/Tablet Search Bar */}
-          <form onSubmit={handleSearchSubmit} className="flex-1 max-w-lg relative hidden md:block">
-            <input
-              type="text"
-              placeholder="Search products, brands and categories..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white text-gray-900 pl-10 pr-4 py-2.5 rounded-full border border-brand-light/35 focus:outline-none focus:ring-2 focus:ring-yellow-400 shadow-inner text-sm transition-all"
-            />
-            <Search className="absolute left-3.5 top-2.5 h-4.5 w-4.5 text-gray-400 pointer-events-none" />
-          </form>
+          {!isLoginPage && (
+            <form onSubmit={handleSearchSubmit} className="flex-1 max-w-lg relative hidden md:block">
+              <input
+                type="text"
+                placeholder="Search products, brands and categories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white text-gray-900 pl-10 pr-4 py-2.5 rounded-full border border-brand-light/35 focus:outline-none focus:ring-2 focus:ring-yellow-400 shadow-inner text-sm transition-all"
+              />
+              <Search className="absolute left-3.5 top-2.5 h-4.5 w-4.5 text-gray-400 pointer-events-none" />
+            </form>
+          )}
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
             
             {/* Cart Link */}
-            <Link to="/cart" className="relative p-2 hover:bg-brand-dark rounded-full transition duration-150 ease-in-out">
-              <ShoppingCart className="h-6 w-6" />
-              {totalCartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-yellow-400 text-brand-dark text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-brand">
-                  {totalCartCount}
-                </span>
-              )}
-            </Link>
+            {!isLoginPage && (
+              <Link to="/cart" className="relative p-2 hover:bg-brand-dark rounded-full transition duration-150 ease-in-out">
+                <ShoppingCart className="h-6 w-6" />
+                {totalCartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-yellow-400 text-brand-dark text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-brand">
+                    {totalCartCount}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Profile / Auth */}
             {user ? (
@@ -128,30 +135,34 @@ export default function Navbar({ onHelpClick }) {
                 )}
               </div>
             ) : (
-              <Link
-                to="/auth"
-                className="bg-yellow-400 hover:bg-yellow-500 text-brand-dark font-black px-5 py-2.5 rounded-full text-sm transition duration-150 ease-in-out active-bounce"
-              >
-                Sign In
-              </Link>
+              !isLoginPage && (
+                <Link
+                  to="/auth"
+                  className="bg-yellow-400 hover:bg-yellow-500 text-brand-dark font-black px-5 py-2.5 rounded-full text-sm transition duration-150 ease-in-out active-bounce"
+                >
+                  Sign In
+                </Link>
+              )
             )}
 
           </div>
         </div>
         
         {/* Mobile Search Bar (Displays below header row) */}
-        <div className="pb-3 md:hidden">
-          <form onSubmit={handleSearchSubmit} className="relative">
-            <input
-              type="text"
-              placeholder="Search biscuit, chips, soap..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white text-gray-900 pl-10 pr-4 py-2.5 rounded-full border border-brand-light/35 focus:outline-none focus:ring-2 focus:ring-yellow-400 shadow-inner text-sm transition-all"
-            />
-            <Search className="absolute left-3 top-2.5 h-4.5 w-4.5 text-gray-400 pointer-events-none" />
-          </form>
-        </div>
+        {!isLoginPage && (
+          <div className="pb-3 md:hidden">
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                type="text"
+                placeholder="Search biscuit, chips, soap..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white text-gray-900 pl-10 pr-4 py-2.5 rounded-full border border-brand-light/35 focus:outline-none focus:ring-2 focus:ring-yellow-400 shadow-inner text-sm transition-all"
+              />
+              <Search className="absolute left-3 top-2.5 h-4.5 w-4.5 text-gray-400 pointer-events-none" />
+            </form>
+          </div>
+        )}
 
       </div>
     </header>

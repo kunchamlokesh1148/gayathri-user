@@ -403,7 +403,7 @@ export default function Auth() {
               onClick={() => { setMode('register'); setError(''); setSuccess(''); setMobileError(''); setEmailError(''); setPasswordError(''); }}
               className={`flex-1 py-3.5 text-sm font-black border-b-2 transition-all cursor-pointer ${mode === 'register' ? 'border-brand text-brand' : 'border-transparent text-gray-400 hover:text-gray-650'}`}
             >
-              Register Shop
+              Register
             </button>
           </div>
 
