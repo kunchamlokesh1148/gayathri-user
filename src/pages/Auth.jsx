@@ -379,15 +379,15 @@ export default function Auth() {
         </div>
 
         {/* Right Column: Card Box */}
-        <div className="w-full max-w-md mx-auto lg:mr-0 lg:ml-auto order-2 relative z-20 opacity-0 animate-card-entry" style={{ animationDelay: '0.6s' }}>
+        <div className="w-full max-w-sm mx-auto lg:mr-0 lg:ml-auto order-2 relative z-20 opacity-0 animate-card-entry" style={{ animationDelay: '0.6s' }}>
         <div className="bg-white rounded-[32px] shadow-2xl border border-brand-light/35 overflow-hidden flex flex-col transition-all duration-300 animate-float-card">
           
           {/* Header Branding */}
-          <div className="bg-brand p-6 text-white text-center">
-            <div className="inline-flex p-3 bg-brand-dark rounded-full mb-3 border-2 border-yellow-400 shadow-md">
-              <Store className="h-8 w-8 text-yellow-400" />
+          <div className="bg-brand p-4 text-white text-center">
+            <div className="inline-flex p-2 bg-brand-dark rounded-full mb-2 border-2 border-yellow-400 shadow-md">
+              <Store className="h-6 w-6 text-yellow-400" />
             </div>
-            <h2 className="text-xl font-bold tracking-tight animate-fade-in-up">Wholesale Partner Portal</h2>
+            <h2 className="text-lg font-bold tracking-tight animate-fade-in-up">Wholesale Partner Portal</h2>
             <p className="text-xs text-brand-light mt-0.5 font-medium animate-fade-in-up">Browse, order, and track for your retail store</p>
           </div>
 
@@ -407,7 +407,7 @@ export default function Auth() {
             </button>
           </div>
 
-          <div className="p-6 sm:p-8">
+          <div className="p-5 sm:p-6">
             {error && (
               <div className="mb-4 p-3.5 bg-red-50 text-red-700 text-xs font-semibold rounded-2xl border border-red-100 flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-red-500 flex-shrink-0 animate-ping" />
