@@ -357,15 +357,17 @@ export default function Home() {
 
       {/* 3. Featured Products */}
       <section className="px-4 animate-fade-in-up">
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center space-x-2">
-            <Percent className="h-5 w-5 text-yellow-500" />
-            <h2 className="text-xl font-extrabold text-gray-900 tracking-tight">Best wholesale margins</h2>
-            <span className="text-xs font-mono font-bold text-indigo-500 bg-indigo-50/80 px-2 py-0.5 rounded-lg border border-indigo-100">
+        <div className="flex justify-between items-start sm:items-center mb-4 gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+            <div className="flex items-center space-x-1.5">
+              <Percent className="h-5 w-5 text-yellow-500 flex-shrink-0" />
+              <h2 className="text-xl font-extrabold text-gray-900 tracking-tight">Best wholesale margins</h2>
+            </div>
+            <span className="text-[10px] sm:text-xs font-mono font-bold text-indigo-500 bg-indigo-50/80 px-2 py-0.5 rounded-lg border border-indigo-100 w-fit whitespace-nowrap">
               Products Found: {products.length}
             </span>
           </div>
-          <Link to="/products" className="text-brand hover:text-brand-dark text-sm font-bold flex items-center gap-1">
+          <Link to="/products" className="text-brand hover:text-brand-dark text-sm font-bold flex items-center gap-1 flex-shrink-0 pt-1 sm:pt-0">
             See All <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

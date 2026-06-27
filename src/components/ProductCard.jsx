@@ -83,21 +83,24 @@ export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onVi
           />
         )}
 
-        {/* Brand Tag */}
-        <span className="absolute top-2.5 left-2.5 bg-accent text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-sm">
-          {product.brand}
-        </span>
+        {/* Top Badges Container */}
+        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1 flex-wrap">
+          {/* Brand Tag */}
+          <span className="bg-accent text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-sm truncate max-w-[50%]">
+            {product.brand}
+          </span>
 
-        {/* Stock Status Badge */}
-        <span className="absolute top-2.5 right-2.5 text-[9px] font-black px-2.5 py-0.5 rounded-full shadow-sm bg-red-500 text-white" style={{
-          backgroundColor: isOutOfStock 
-            ? '#ef4444' 
-            : availablePacks <= alertLimit
-              ? '#f97316'
-              : '#10b981'
-        }}>
-          {isOutOfStock ? 'Out Of Stock' : (availablePacks <= alertLimit ? 'Low Stock' : 'In Stock')}
-        </span>
+          {/* Stock Status Badge */}
+          <span className="text-[9px] font-black px-2.5 py-0.5 rounded-full shadow-sm bg-red-500 text-white whitespace-nowrap" style={{
+            backgroundColor: isOutOfStock 
+              ? '#ef4444' 
+              : availablePacks <= alertLimit
+                ? '#f97316'
+                : '#10b981'
+          }}>
+            {isOutOfStock ? 'Out Of Stock' : (availablePacks <= alertLimit ? 'Low Stock' : 'In Stock')}
+          </span>
+        </div>
       </div>
 
       {/* Info & Action Area */}

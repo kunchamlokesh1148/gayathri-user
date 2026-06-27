@@ -33,10 +33,9 @@ export default function Navbar({ onHelpClick }) {
           {/* Logo / Brand */}
           <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
             <Store className="h-8 w-8 text-white" />
-            <span className="font-extrabold text-xl tracking-tight hidden sm:block">
-              Gayathri <span className="text-yellow-400">Cutmit</span> <span className="text-xs font-semibold bg-white text-brand px-1.5 py-0.5 rounded ml-1">WHOLESALE</span>
+            <span className="font-extrabold text-lg sm:text-xl tracking-tight">
+              Gayathri <span className="text-yellow-400">Cutmit</span> <span className="text-[10px] sm:text-xs font-semibold bg-white text-brand px-1.5 py-0.5 rounded ml-1">WHOLESALE</span>
             </span>
-            <span className="font-extrabold text-xl tracking-tight sm:hidden text-yellow-400">GCW</span>
           </Link>
 
           {/* Desktop/Tablet Search Bar */}
