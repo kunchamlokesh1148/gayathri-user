@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { X, Plus, Minus, Check, Package, ShoppingBag } from 'lucide-react';
 
+const DEFAULT_PRODUCT_IMAGE = "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600";
+
 export default function ProductDetailsModal({ product, isOpen, onClose, cartQty, onAdd, onUpdateQty }) {
   const [imgFailed, setImgFailed] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
@@ -66,19 +68,22 @@ export default function ProductDetailsModal({ product, isOpen, onClose, cartQty,
         <div className="overflow-y-auto no-scrollbar flex-grow">
           {/* Product Image Area */}
           <div className="relative aspect-video bg-gray-50 flex items-center justify-center border-b border-gray-100">
-            {(!(product.imageUrl || product.image) || imgFailed) ? (
-              <div className="w-full h-full bg-gradient-to-br from-brand-light to-brand flex flex-col items-center justify-center p-6 text-white">
-                <Package className="h-16 w-16 mb-2 opacity-95 stroke-[1.2]" />
-                <span className="text-xs font-black tracking-widest uppercase opacity-75">{product.category}</span>
-              </div>
-            ) : (
-              <img
-                src={product.imageUrl || product.image}
-                alt={product.name}
-                onError={() => setImgFailed(true)}
-                className="w-full h-full object-cover"
-              />
-            )}
+            <img
+              src={product.imageUrl || DEFAULT_PRODUCT_IMAGE}
+              alt={product.name}
+              loading="lazy"
+              onError={(e) => {
+                console.warn(`[ProductDetailsModal Error] Failed to load image. Details:`, {
+                  productId: product.id || 'N/A',
+                  firestoreImageUrl: product.imageUrl || 'N/A',
+                  cloudinaryUrl: product.imageUrl?.includes('cloudinary.com') ? product.imageUrl : 'N/A',
+                  imageLoadStatus: 'failed',
+                  error: 'Image source loading triggered onError fallback'
+                });
+                e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
+              }}
+              className="w-full h-full object-cover"
+            />
 
             {/* Brand Tag */}
             <span className="absolute bottom-4 left-4 bg-accent text-white text-xs font-black px-3 py-1.5 rounded-full shadow-md">

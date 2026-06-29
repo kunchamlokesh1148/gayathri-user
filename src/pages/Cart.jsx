@@ -113,8 +113,19 @@ export default function Cart() {
                 {/* Product Thumbnail */}
                 <div className="h-16 w-16 rounded-[16px] overflow-hidden bg-gray-50 flex-shrink-0">
                   <img 
-                    src={product.image || product.imageUrl} 
+                    src={product.imageUrl || 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600'} 
                     alt={product.name} 
+                    loading="lazy"
+                    onError={(e) => {
+                      console.warn(`[Cart Error] Failed to load image. Details:`, {
+                        productId: product.id || 'N/A',
+                        firestoreImageUrl: product.imageUrl || 'N/A',
+                        cloudinaryUrl: product.imageUrl?.includes('cloudinary.com') ? product.imageUrl : 'N/A',
+                        imageLoadStatus: 'failed',
+                        error: 'Image source loading triggered onError fallback'
+                      });
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600';
+                    }}
                     className="h-full w-full object-cover"
                   />
                 </div>

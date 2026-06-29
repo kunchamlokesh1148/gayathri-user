@@ -173,7 +173,8 @@ export const CartProvider = ({ children }) => {
           price: price * multiplier,
           unit: prod.unit || "",
           quantity: item.quantity || 0,
-          image: prod.image || ""
+          imageUrl: prod.imageUrl || "",
+          image: prod.imageUrl || prod.image || ""
         };
       }),
       subtotal: subtotal || 0,
@@ -195,7 +196,8 @@ export const CartProvider = ({ children }) => {
         brand: item.brand,
         price: item.price,
         unit: item.unit,
-        image: item.image
+        imageUrl: item.imageUrl || item.image || "",
+        image: item.imageUrl || item.image || ""
       },
       quantity: item.quantity
     }));

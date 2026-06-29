@@ -44,25 +44,59 @@ export const logoutUser = async () => {
   localStorage.removeItem('wh_session');
 };
 
+const mapAuthError = (error) => {
+  console.error("Original Firebase Auth Error:", error);
+  const code = error?.code || error?.message || "";
+  const errorText = typeof code === 'string' ? code.toLowerCase() : "";
+
+  if (
+    errorText.includes("invalid-credential") ||
+    errorText.includes("wrong-password") ||
+    errorText.includes("invalid-email")
+  ) {
+    return "Invalid credentials. Please check your email and password and try again.";
+  }
+  if (errorText.includes("user-not-found")) {
+    return "No account found with the provided credentials.";
+  }
+  if (errorText.includes("email-already-in-use")) {
+    return "An account with this email already exists.";
+  }
+  if (errorText.includes("weak-password")) {
+    return "Password must be at least 6 characters long.";
+  }
+  if (errorText.includes("network-request-failed") || errorText.includes("network")) {
+    return "Network error. Please check your internet connection and try again.";
+  }
+  if (errorText.includes("too-many-requests") || errorText.includes("too-many-login-attempts")) {
+    return "Too many failed login attempts. Please try again later.";
+  }
+  return "Something went wrong. Please try again.";
+};
+
 export const loginWithEmailAndPassword = async (email, password) => {
   if (isFirebaseActive) {
-    const userCredential = await signInWithEmailAndPassword(auth, email.trim().toLowerCase(), password);
-    const uid = userCredential.user.uid;
-    let profile = await getUserProfile(uid);
-    if (!profile) {
-      profile = {
-        email: userCredential.user.email || email.trim().toLowerCase(),
-        ownerName: userCredential.user.displayName || email.split('@')[0] || "Shop Owner",
-        mobile: "0000000000",
-        address: "Set your Address",
-        role: "customer",
-        status: "active",
-        createdAt: serverTimestamp()
-      };
-      await saveUserProfile(uid, profile);
-      profile = await getUserProfile(uid);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email.trim().toLowerCase(), password);
+      const uid = userCredential.user.uid;
+      let profile = await getUserProfile(uid);
+      if (!profile) {
+        profile = {
+          email: userCredential.user.email || email.trim().toLowerCase(),
+          ownerName: userCredential.user.displayName || email.split('@')[0] || "Shop Owner",
+          mobile: "0000000000",
+          address: "Set your Address",
+          role: "customer",
+          status: "active",
+          createdAt: serverTimestamp()
+        };
+        await saveUserProfile(uid, profile);
+        profile = await getUserProfile(uid);
+      }
+      return { uid, ...profile };
+    } catch (error) {
+      throw new Error(mapAuthError(error));
     }
-    return { uid, ...profile };
   }
   throw new Error("Firebase not active.");
 };
@@ -83,29 +117,33 @@ export const registerCustomer = async (formData) => {
       throw new Error("An account with this email address already exists. Please sign in.");
     }
 
-    const userCredential = await createUserWithEmailAndPassword(auth, email.trim().toLowerCase(), password);
-    const uid = userCredential.user.uid;
-    
-    const cleanMobile = mobile.trim();
-    const formattedMobile = cleanMobile.startsWith('+91') ? cleanMobile : `+91${cleanMobile}`;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email.trim().toLowerCase(), password);
+      const uid = userCredential.user.uid;
+      
+      const cleanMobile = mobile.trim();
+      const formattedMobile = cleanMobile.startsWith('+91') ? cleanMobile : `+91${cleanMobile}`;
 
-    const profile = {
-      email: email.trim().toLowerCase(),
-      ownerName: ownerName.trim(),
-      mobile: formattedMobile,
-      address: address.trim(),
-      deliveryAddress: formData.deliveryAddress || null,
-      role: "customer",
-      status: "active",
-      createdAt: serverTimestamp()
-    };
+      const profile = {
+        email: email.trim().toLowerCase(),
+        ownerName: ownerName.trim(),
+        mobile: formattedMobile,
+        address: address.trim(),
+        deliveryAddress: formData.deliveryAddress || null,
+        role: "customer",
+        status: "active",
+        createdAt: serverTimestamp()
+      };
 
-    if (shopName && shopName.trim() !== '') {
-      profile.shopName = shopName.trim();
+      if (shopName && shopName.trim() !== '') {
+        profile.shopName = shopName.trim();
+      }
+
+      await saveUserProfile(uid, profile);
+      return { uid, ...profile };
+    } catch (error) {
+      throw new Error(mapAuthError(error));
     }
-
-    await saveUserProfile(uid, profile);
-    return { uid, ...profile };
   }
   throw new Error("Firebase not active.");
 };

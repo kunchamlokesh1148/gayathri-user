@@ -208,8 +208,11 @@ export default function Orders() {
                     {order.items.slice(0, 3).map((item, idx) => (
                       <img
                         key={item.id}
-                        src={item.image}
+                        src={item.imageUrl || item.image || 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600'}
                         alt={item.name}
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600';
+                        }}
                         className="h-10 w-10 rounded-full border-2 border-white object-cover shadow-sm bg-gray-50"
                         title={item.name}
                       />

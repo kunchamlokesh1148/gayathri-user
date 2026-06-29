@@ -19,6 +19,8 @@ const CATEGORY_GRADIENTS = {
   Shampoos: 'from-blue-100 to-indigo-200 text-blue-800'
 };
 
+const DEFAULT_PRODUCT_IMAGE = "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600";
+
 export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onViewDetails }) {
   const [imgFailed, setImgFailed] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
@@ -69,19 +71,22 @@ export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onVi
       
       {/* Inset Floating Image Area */}
       <div className="relative aspect-square bg-gray-50/50 overflow-hidden flex-shrink-0 flex items-center justify-center rounded-2xl m-3.5 border border-brand/5 shadow-inner">
-        {(!(product.imageUrl || product.image) || imgFailed) ? (
-          <div className={`w-full h-full bg-gradient-to-br ${gradient} flex flex-col items-center justify-center p-4`}>
-            <Icon className="h-10 w-10 mb-1.5 opacity-90 stroke-[1.5]" />
-            <span className="text-[9px] font-black tracking-widest uppercase opacity-75">{product.category}</span>
-          </div>
-        ) : (
-          <img
-            src={product.imageUrl || product.image}
-            alt={product.name}
-            onError={() => setImgFailed(true)}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        )}
+        <img
+          src={product.imageUrl || DEFAULT_PRODUCT_IMAGE}
+          alt={product.name}
+          loading="lazy"
+          onError={(e) => {
+            console.warn(`[ProductCard Error] Failed to load image. Details:`, {
+              productId: product.id || 'N/A',
+              firestoreImageUrl: product.imageUrl || 'N/A',
+              cloudinaryUrl: product.imageUrl?.includes('cloudinary.com') ? product.imageUrl : 'N/A',
+              imageLoadStatus: 'failed',
+              error: 'Image source loading triggered onError fallback'
+            });
+            e.currentTarget.src = DEFAULT_PRODUCT_IMAGE;
+          }}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
 
         {/* Top Badges Container */}
         <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1 flex-wrap">

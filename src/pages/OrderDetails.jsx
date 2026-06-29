@@ -298,7 +298,14 @@ export default function OrderDetails() {
           {order.items.map((item) => (
             <div key={item.id} className="p-4 sm:p-5 flex items-center justify-between gap-4">
               <div className="h-12 w-12 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
-                <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
+                <img 
+                  src={item.imageUrl || item.image || 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600'} 
+                  alt={item.name} 
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600';
+                  }}
+                  className="h-full w-full object-cover" 
+                />
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="font-bold text-sm text-gray-900 truncate leading-snug">{item.name}</h4>
