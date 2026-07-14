@@ -466,7 +466,7 @@ export default function Auth() {
                   <div className="relative">
                     <input
                       type="email"
-                      placeholder="example@gmail.com"
+                      placeholder="Email Address"
                       value={loginEmail}
                       onChange={(e) => setLoginEmail(e.target.value)}
                       className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-2xl text-sm font-bold text-gray-800 uppercase focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white transition-all placeholder:normal-case placeholder:text-gray-300"
@@ -518,7 +518,7 @@ export default function Auth() {
                       <input
                         type="text"
                         name="shopName"
-                        placeholder="e.g. Kirana Store"
+                        placeholder="Shop Name"
                         value={registerForm.shopName}
                         onChange={handleRegisterChange}
                         className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-2xl text-sm font-bold text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white transition-all placeholder:text-gray-300"
@@ -533,7 +533,7 @@ export default function Auth() {
                       <input
                         type="text"
                         name="ownerName"
-                        placeholder="e.g. Name"
+                        placeholder="User Name"
                         value={registerForm.ownerName}
                         onChange={handleRegisterChange}
                         className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-150 rounded-2xl text-sm font-bold text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand focus:bg-white transition-all placeholder:text-gray-300"
@@ -551,7 +551,7 @@ export default function Auth() {
                       <input
                         type="tel"
                         name="mobile"
-                        placeholder="10-digit number"
+                        placeholder="Mobile Number"
                         value={registerForm.mobile}
                         onChange={(e) => {
                           const val = e.target.value.replace(/\D/g,'').slice(0,10);
@@ -582,7 +582,7 @@ export default function Auth() {
                       <input
                         type="email"
                         name="email"
-                        placeholder="example@gmail.com"
+                        placeholder="Email Address"
                         value={registerForm.email}
                         onChange={(e) => {
                           handleRegisterChange(e);
@@ -653,7 +653,7 @@ export default function Auth() {
                           <input
                             type="text"
                             required
-                            placeholder="e.g. 2-3-678"
+                            placeholder="House/Flat No"
                             value={manualAddressForm.houseNumber}
                             onChange={(e) => setManualAddressForm(p => ({ ...p, houseNumber: e.target.value }))}
                             className="w-full px-3 py-2 border border-gray-200 rounded-xl text-xs font-bold text-gray-800 focus:outline-none focus:ring-1 focus:ring-brand bg-white"
@@ -664,7 +664,7 @@ export default function Auth() {
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Sanjeeviah Nagar"
+                            placeholder="Street Name"
                             value={manualAddressForm.street}
                             onChange={(e) => setManualAddressForm(p => ({ ...p, street: e.target.value }))}
                             className="w-full px-3 py-2 border border-gray-200 rounded-xl text-xs font-bold text-gray-800 focus:outline-none focus:ring-1 focus:ring-brand bg-white"
@@ -678,7 +678,7 @@ export default function Auth() {
                           <input
                             type="text"
                             required
-                            placeholder="e.g. Bus Stand area"
+                            placeholder="Area/Locality"
                             value={manualAddressForm.area}
                             onChange={(e) => setManualAddressForm(p => ({ ...p, area: e.target.value }))}
                             className="w-full px-3 py-2 border border-gray-200 rounded-xl text-xs font-bold text-gray-800 focus:outline-none focus:ring-1 focus:ring-brand bg-white"
@@ -688,7 +688,7 @@ export default function Auth() {
                           <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1">Landmark (Optional)</label>
                           <input
                             type="text"
-                            placeholder="e.g. Near Bus Stand"
+                            placeholder="Landmark (Optional)"
                             value={manualAddressForm.landmark}
                             onChange={(e) => setManualAddressForm(p => ({ ...p, landmark: e.target.value }))}
                             className="w-full px-3 py-2 border border-gray-200 rounded-xl text-xs font-bold text-gray-800 focus:outline-none focus:ring-1 focus:ring-brand bg-white"
@@ -703,7 +703,7 @@ export default function Auth() {
                             type="text"
                             required
                             maxLength="6"
-                            placeholder="502103"
+                            placeholder="Pincode"
                             value={manualAddressForm.pincode}
                             onChange={(e) => setManualAddressForm(p => ({ ...p, pincode: e.target.value.replace(/\D/g,'') }))}
                             className="w-full px-3 py-2 border border-gray-200 rounded-xl text-xs font-bold text-gray-800 focus:outline-none focus:ring-1 focus:ring-brand bg-white"
