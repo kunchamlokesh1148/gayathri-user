@@ -369,7 +369,7 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mobile-stitch-container">
             {displayFeatured.map((prod, idx) => (
               <div
                 key={prod.id}
@@ -408,7 +408,7 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mobile-stitch-container">
             {popularProducts.map((prod, idx) => (
               <div
                 key={prod.id}

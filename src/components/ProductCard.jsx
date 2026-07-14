@@ -40,7 +40,7 @@ export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onVi
   return (
     <div 
       onClick={() => onViewDetails && onViewDetails(product)}
-      className="custom-card custom-card-hover flex flex-col overflow-hidden group cursor-pointer"
+      className="custom-card custom-card-hover flex flex-col overflow-hidden group cursor-pointer max-md:stitch-card mobile-stitch-item"
     >
       
       {/* Inset Floating Image Area */}

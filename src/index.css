@@ -13,6 +13,18 @@
   --animate-fade-in-left: fadeInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-scale-in: scaleIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   --animate-float: float 3s ease-in-out infinite;
+  --animate-stitch-in: stitchIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+
+  @keyframes stitchIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
 
   @keyframes fadeInUp {
     from {
@@ -355,3 +367,39 @@ body.login-bg {
   transition: 0s;
 }
 
+
+/* Stitch Card Design system for mobile-view */
+@utility stitch-card {
+  border: 1.5px dashed var(--color-brand) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(15, 138, 95, 0.04) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+}
+
+.stitch-card::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 4px !important;
+  left: 4px !important;
+  right: 4px !important;
+  bottom: 4px !important;
+  border: 1px dashed rgba(15, 138, 95, 0.25) !important;
+  border-radius: 8px !important;
+  pointer-events: none !important;
+}
+
+@utility mobile-stitch-item {
+  opacity: 0;
+  animation: stitchIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+}
+
+/* Staggered mobile stitch animation delays */
+.mobile-stitch-container > *:nth-child(1) { animation-delay: 50ms; }
+.mobile-stitch-container > *:nth-child(2) { animation-delay: 100ms; }
+.mobile-stitch-container > *:nth-child(3) { animation-delay: 150ms; }
+.mobile-stitch-container > *:nth-child(4) { animation-delay: 200ms; }
+.mobile-stitch-container > *:nth-child(5) { animation-delay: 250ms; }
+.mobile-stitch-container > *:nth-child(6) { animation-delay: 300ms; }
+.mobile-stitch-container > *:nth-child(7) { animation-delay: 350ms; }
+.mobile-stitch-container > *:nth-child(8) { animation-delay: 400ms; }
