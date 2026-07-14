@@ -56,25 +56,42 @@ export default function Profile() {
       async (position) => {
         try {
           const { latitude, longitude } = position.coords;
-          const geoData = await reverseGeocode(latitude, longitude);
-          const addr = geoData.address || {};
+
+          // Center coordinates of Siddipet, Telangana, India
+          const SIDDIPET_CENTER_LAT = 18.1019;
+          const SIDDIPET_CENTER_LON = 78.8519;
+
+          // Haversine distance formula to calculate distance in km
+          const getDistanceInKm = (lat1, lon1, lat2, lon2) => {
+            const R = 6371; // Radius of the earth in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+              Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+              Math.sin(dLon / 2) * Math.sin(dLon / 2); 
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+            return R * c;
+          };
+
+          const distance = getDistanceInKm(latitude, longitude, SIDDIPET_CENTER_LAT, SIDDIPET_CENTER_LON);
           
-          const city = addr.city || addr.town || addr.village || addr.municipality || "";
-          const district = addr.county || addr.district || addr.state_district || "";
-          const state = addr.state || "";
-          const pincode = addr.postcode || "";
-          
-          const isSiddipet = 
-            state.toLowerCase().includes("telangana") &&
-            (city.toLowerCase().includes("siddipet") || district.toLowerCase().includes("siddipet"));
-            
-          if (!isSiddipet) {
-            setError("Sorry! Gayathri Cutmit Wholesale currently delivers only within Siddipet, Telangana.");
+          if (distance > 5) {
+            setError("Sorry! Gayathri Cutmit Wholesale currently delivers only within a 5km radius of Siddipet town center.");
             setAddressDetails(null);
             setGpsLoading(false);
             return;
           }
+
+          let geoData = {};
+          try {
+            geoData = await reverseGeocode(latitude, longitude);
+          } catch (ge) {
+            console.warn("Reverse geocode failed, using defaults:", ge);
+          }
+          const addr = geoData.address || {};
           
+          const pincode = addr.postcode || "502103";
           const street = addr.road || "";
           const area = addr.suburb || addr.neighbourhood || addr.residential || "";
           const houseNumber = addr.house_number || "";
