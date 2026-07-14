@@ -92,7 +92,7 @@ export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onVi
         </div>
 
         <div className="space-y-2.5">
-          <div className="flex items-baseline justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-0">
             <div className="flex items-baseline space-x-1">
               <span className="text-base sm:text-lg font-black text-brand">
                 ₹{(product.wholesalePrice !== undefined ? product.wholesalePrice : (product.price || 0)) * ((product.wholesaleUnit === 'Pack' || product.wholesaleUnit === 'Box') ? (parseInt(product.packQuantity) || 12) : 1)}
@@ -100,7 +100,7 @@ export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onVi
               <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Wholesale</span>
             </div>
             {unitMrp > 0 && (
-              <span className="text-[11px] font-bold">
+              <span className="text-[11px] font-bold text-gray-500 sm:text-right">
                 <span className="text-gray-400">MRP </span>
                 <span className="text-red-500 line-through">₹{unitMrp}</span>
               </span>
