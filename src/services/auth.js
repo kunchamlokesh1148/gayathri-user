@@ -1,4 +1,4 @@
-import { auth, db, isFirebaseActive } from './firebase';
+import { auth, isFirebaseActive } from './firebase';
 import { 
   signInWithEmailAndPassword, 
   createUserWithEmailAndPassword, 
@@ -95,7 +95,7 @@ export const loginWithEmailAndPassword = async (email, password) => {
       }
       return { uid, ...profile };
     } catch (error) {
-      throw new Error(mapAuthError(error));
+      throw new Error(mapAuthError(error), { cause: error });
     }
   }
   throw new Error("Firebase not active.");
@@ -142,7 +142,7 @@ export const registerCustomer = async (formData) => {
       await saveUserProfile(uid, profile);
       return { uid, ...profile };
     } catch (error) {
-      throw new Error(mapAuthError(error));
+      throw new Error(mapAuthError(error), { cause: error });
     }
   }
   throw new Error("Firebase not active.");

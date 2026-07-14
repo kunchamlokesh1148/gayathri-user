@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { getOrders } from '../services/db';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { ClipboardList, ArrowRight, RefreshCw, Eye, Calendar, DollarSign, PackageOpen } from 'lucide-react';
+import { ClipboardList, RefreshCw, Eye, Calendar, PackageOpen } from 'lucide-react';
 
 export default function Orders() {
   const { user } = useAuth();
@@ -205,7 +205,7 @@ export default function Orders() {
               <div className="p-4 sm:p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div className="flex items-center gap-3 overflow-hidden">
                   <div className="flex -space-x-4 overflow-hidden flex-shrink-0">
-                    {order.items.slice(0, 3).map((item, idx) => (
+                    {order.items.slice(0, 3).map((item) => (
                       <img
                         key={item.id}
                         src={item.imageUrl || item.image || 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600'}

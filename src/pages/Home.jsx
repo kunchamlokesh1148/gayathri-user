@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getProducts, getCarouselBanners, getSettings, getCategories } from '../services/db';
 import { useCart } from '../context/CartContext';
@@ -17,8 +17,7 @@ import {
   ChevronRight, 
   ArrowRight,
   TrendingUp,
-  Percent,
-  Search
+  Percent
 } from 'lucide-react';
 
 const DEFAULT_BANNERS = [
@@ -92,7 +91,6 @@ export default function Home() {
     let unsubscribeCategories = () => {};
  
     if (isFirebaseActive) {
-      setLoading(true);
       // 1. Subscribe to Products
       unsubscribeProducts = onSnapshot(collection(db, 'products'), (snap) => {
         const prodData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -181,6 +179,7 @@ export default function Home() {
     if (selectedProduct) {
       const updated = products.find(p => p.id === selectedProduct.id);
       if (!updated) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedProduct(null);
       } else if (
         updated.price !== selectedProduct.price || 
@@ -203,15 +202,6 @@ export default function Home() {
     }, 5000);
     return () => clearInterval(interval);
   }, [displayBanners]);
-
-  const handleAddToCartClick = (product) => {
-    addToCart(product, 1);
-    // Visual indicator on card
-    setAddedItems(prev => ({ ...prev, [product.id]: true }));
-    setTimeout(() => {
-      setAddedItems(prev => ({ ...prev, [product.id]: false }));
-    }, 1500);
-  };
 
   const featuredProducts = products.filter(p => p.featured === true).slice(0, 4);
   const displayFeatured = featuredProducts.length > 0 ? featuredProducts : products.slice(0, 4);

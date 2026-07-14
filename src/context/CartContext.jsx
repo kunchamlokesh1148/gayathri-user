@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { createOrder } from '../services/db';
 import { db, isFirebaseActive } from '../services/firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -11,7 +11,10 @@ export const CartProvider = ({ children }) => {
     return localCart ? JSON.parse(localCart) : [];
   });
 
-  const [dbProducts, setDbProducts] = useState([]);
+  const [dbProducts, setDbProducts] = useState(() => {
+    const localData = localStorage.getItem('wh_products');
+    return localData ? JSON.parse(localData) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem('wh_cart', JSON.stringify(cartItems));
@@ -26,11 +29,6 @@ export const CartProvider = ({ children }) => {
       }, (error) => {
         console.error("[CartContext] onSnapshot products error:", error);
       });
-    } else {
-      const localData = localStorage.getItem('wh_products');
-      if (localData) {
-        setDbProducts(JSON.parse(localData));
-      }
     }
     return () => unsubscribe();
   }, []);
@@ -43,14 +41,8 @@ export const CartProvider = ({ children }) => {
     const packQuantity = parseInt(latestProduct?.packQuantity) || 1;
     const stockQty = latestProduct?.stockQty !== undefined ? parseInt(latestProduct.stockQty) : 0;
 
-    let availablePacks = 0;
     const isPack = wholesaleUnit.includes('pack') || wholesaleUnit.includes('box');
-    if (isPack) {
-      const pQty = packQuantity > 0 ? packQuantity : 1;
-      availablePacks = Math.floor(stockQty / pQty);
-    } else {
-      availablePacks = stockQty;
-    }
+    const availablePacks = isPack ? Math.floor(stockQty / (packQuantity > 0 ? packQuantity : 1)) : stockQty;
 
     console.log("[CartContext] addToCart details:", {
       stockQty,
@@ -104,14 +96,8 @@ export const CartProvider = ({ children }) => {
     const packQuantity = parseInt(latestProduct?.packQuantity) || 1;
     const stockQty = latestProduct?.stockQty !== undefined ? parseInt(latestProduct.stockQty) : 0;
 
-    let availablePacks = 0;
     const isPack = wholesaleUnit.includes('pack') || wholesaleUnit.includes('box');
-    if (isPack) {
-      const pQty = packQuantity > 0 ? packQuantity : 1;
-      availablePacks = Math.floor(stockQty / pQty);
-    } else {
-      availablePacks = stockQty;
-    }
+    const availablePacks = isPack ? Math.floor(stockQty / (packQuantity > 0 ? packQuantity : 1)) : stockQty;
 
     console.log("[CartContext] updateQuantity details:", {
       stockQty,
@@ -224,4 +210,5 @@ export const CartProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => useContext(CartContext);

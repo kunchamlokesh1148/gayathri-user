@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { X, Plus, Minus, Check, Package, ShoppingBag } from 'lucide-react';
+import { useState } from 'react';
+import { X, Plus, Minus, Check, ShoppingBag } from 'lucide-react';
 
 const DEFAULT_PRODUCT_IMAGE = "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600";
 
 export default function ProductDetailsModal({ product, isOpen, onClose, cartQty, onAdd, onUpdateQty }) {
-  const [imgFailed, setImgFailed] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
 
   if (!isOpen || !product) return null;
@@ -21,14 +20,8 @@ export default function ProductDetailsModal({ product, isOpen, onClose, cartQty,
   const stockQty = product?.stockQty !== undefined ? parseInt(product.stockQty) : 0;
 
   const alertLimit = product?.minStock !== undefined && product?.minStock !== null ? parseInt(product.minStock) : 10;
-  let availablePacks = 0;
   const isPack = wholesaleUnit.includes('pack') || wholesaleUnit.includes('box');
-  if (isPack) {
-    const pQty = packQuantity > 0 ? packQuantity : 1;
-    availablePacks = Math.floor(stockQty / pQty);
-  } else {
-    availablePacks = stockQty;
-  }
+  const availablePacks = isPack ? Math.floor(stockQty / (packQuantity > 0 ? packQuantity : 1)) : stockQty;
 
   console.log("[ProductDetailsModal] details:", {
     stockQty,

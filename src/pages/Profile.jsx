@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Store, User, Phone, MapPin, Save, Edit3, X, CheckCircle2, Mail } from 'lucide-react';
+import { Store, User, Phone, Save, Edit3, X, CheckCircle2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { reverseGeocode, geocodeManualAddress } from '../services/db';
 
@@ -183,6 +183,7 @@ export default function Profile() {
   // Sync state if user changes in background
   useEffect(() => {
     if (user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData({
         shopName: user.shopName || '',
         ownerName: user.ownerName || '',

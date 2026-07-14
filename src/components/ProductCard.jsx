@@ -1,28 +1,9 @@
-import React, { useState } from 'react';
-import { Plus, Minus, Check, Cookie, Flame, Sparkles, Droplet, Gift, Package } from 'lucide-react';
-
-const CATEGORY_ICONS = {
-  Biscuits: Cookie,
-  Chips: Flame,
-  Namkeens: Flame,
-  Chocolates: Gift,
-  Soaps: Sparkles,
-  Shampoos: Droplet
-};
-
-const CATEGORY_GRADIENTS = {
-  Biscuits: 'from-amber-100 to-amber-200 text-amber-800',
-  Chips: 'from-red-100 to-orange-200 text-red-800',
-  Namkeens: 'from-orange-100 to-yellow-200 text-orange-800',
-  Chocolates: 'from-purple-100 to-indigo-200 text-purple-800',
-  Soaps: 'from-cyan-100 to-teal-200 text-cyan-800',
-  Shampoos: 'from-blue-100 to-indigo-200 text-blue-800'
-};
+import { useState } from 'react';
+import { Plus, Minus, Check } from 'lucide-react';
 
 const DEFAULT_PRODUCT_IMAGE = "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600";
 
 export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onViewDetails }) {
-  const [imgFailed, setImgFailed] = useState(false);
   const [justAdded, setJustAdded] = useState(false);
 
   const handleAddClick = (e) => {
@@ -33,22 +14,15 @@ export default function ProductCard({ product, cartQty, onAdd, onUpdateQty, onVi
     setTimeout(() => setJustAdded(false), 1500);
   };
 
-  const Icon = CATEGORY_ICONS[product.category] || Package;
-  const gradient = CATEGORY_GRADIENTS[product.category] || 'from-blue-100 to-indigo-200 text-blue-800';
+
 
   const wholesaleUnit = String(product?.wholesaleUnit || '').toLowerCase();
   const packQuantity = parseInt(product?.packQuantity) || 1;
   const stockQty = product?.stockQty !== undefined ? parseInt(product.stockQty) : 0;
 
   const alertLimit = product?.minStock !== undefined && product?.minStock !== null ? parseInt(product.minStock) : 10;
-  let availablePacks = 0;
   const isPack = wholesaleUnit.includes('pack') || wholesaleUnit.includes('box');
-  if (isPack) {
-    const pQty = packQuantity > 0 ? packQuantity : 1;
-    availablePacks = Math.floor(stockQty / pQty);
-  } else {
-    availablePacks = stockQty;
-  }
+  const availablePacks = isPack ? Math.floor(stockQty / (packQuantity > 0 ? packQuantity : 1)) : stockQty;
 
   console.log("[ProductCard] details:", {
     stockQty,

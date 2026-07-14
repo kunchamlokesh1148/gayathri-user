@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Store, Lock, Eye, EyeOff, User, MapPin, Phone, Mail } from 'lucide-react';
+import { Store, Lock, Eye, EyeOff, User, Phone, Mail } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress } from '../services/db';
 
 /**
@@ -320,7 +320,7 @@ export default function Auth() {
     setError('');
     setSuccess('');
 
-    const { shopName, ownerName, mobile, email, address, password } = registerForm;
+    const { ownerName, mobile, email, password } = registerForm;
 
     if (mobileError || emailError || passwordError) {
       setError('Please correct the validation errors.');

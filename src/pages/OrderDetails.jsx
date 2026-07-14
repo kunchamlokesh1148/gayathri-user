@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { getOrderById, getUserProfile } from '../services/db';
 import { db, isFirebaseActive } from '../services/firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { 
   ChevronLeft, 
-  MapPin, 
   Phone, 
   Store, 
   Calendar, 
@@ -15,8 +14,7 @@ import {
   Truck, 
   Package, 
   ThumbsUp, 
-  Lock,
-  ArrowRight
+  Lock
 } from 'lucide-react';
 
 const STATUS_STEPS = [
@@ -32,7 +30,7 @@ export default function OrderDetails() {
   const location = useLocation();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [justPlaced, setJustPlaced] = useState(location.state?.orderPlaced || false);
+  const justPlaced = location.state?.orderPlaced || false;
   const [driver, setDriver] = useState(null);
   const [driverLoading, setDriverLoading] = useState(false);
   const [customerProfile, setCustomerProfile] = useState(null);
@@ -41,7 +39,6 @@ export default function OrderDetails() {
     let unsubscribe = () => {};
 
     if (isFirebaseActive && id) {
-      setLoading(true);
       const docRef = doc(db, 'orders', id);
       unsubscribe = onSnapshot(docRef, (docSnap) => {
         if (docSnap.exists()) {
@@ -78,6 +75,7 @@ export default function OrderDetails() {
     const isDriverStatus = order?.status === 'Out For Delivery' || order?.status === 'Delivered';
 
     if (isFirebaseActive && driverId && isDriverStatus) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDriverLoading(true);
       const driverRef = doc(db, 'deliveryStaff', driverId);
       unsubscribeDriver = onSnapshot(driverRef, (docSnap) => {
@@ -102,6 +100,7 @@ export default function OrderDetails() {
   useEffect(() => {
     const custId = order?.customerId || order?.userId;
     if (!custId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCustomerProfile(null);
       return;
     }

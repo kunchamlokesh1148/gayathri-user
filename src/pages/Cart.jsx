@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingCart, Plus, Minus, Trash2, ArrowRight, ShieldCheck, MapPin, Store } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, Trash2, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 
 export default function Cart() {
-  const { cartItems, updateQuantity, removeFromCart, subtotal, gst, deliveryFee, totalAmount, checkout, dbProducts } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, subtotal, deliveryFee, totalAmount, checkout, dbProducts } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -87,14 +87,8 @@ export default function Cart() {
             const packQuantity = parseInt(product?.packQuantity) || 1;
             const stockQty = product?.stockQty !== undefined ? parseInt(product.stockQty) : 0;
 
-            let availablePacks = 0;
             const isPack = wholesaleUnit.includes('pack') || wholesaleUnit.includes('box');
-            if (isPack) {
-              const pQty = packQuantity > 0 ? packQuantity : 1;
-              availablePacks = Math.floor(stockQty / pQty);
-            } else {
-              availablePacks = stockQty;
-            }
+            const availablePacks = isPack ? Math.floor(stockQty / (packQuantity > 0 ? packQuantity : 1)) : stockQty;
 
             console.log("[Cart page] details:", {
               stockQty,

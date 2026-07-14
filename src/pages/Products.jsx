@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getProducts, getCategories } from '../services/db';
 import { useCart } from '../context/CartContext';
@@ -15,7 +15,6 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Filter states
@@ -31,7 +30,6 @@ export default function Products() {
     let unsubscribeCategories = () => {};
 
     if (isFirebaseActive) {
-      setLoading(true);
       unsubscribeProducts = onSnapshot(collection(db, 'products'), (snap) => {
         const prodData = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         const activeProds = prodData.filter(p => !p.status || p.status.toLowerCase() === 'active');
@@ -85,6 +83,7 @@ export default function Products() {
     if (selectedProduct) {
       const updated = products.find(p => p.id === selectedProduct.id);
       if (!updated) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedProduct(null);
       } else if (
         updated.price !== selectedProduct.price || 
@@ -99,11 +98,12 @@ export default function Products() {
 
   // Sync local search input with URL search params
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLocalSearch(searchQuery);
   }, [searchQuery]);
 
   // Apply filters and sorting
-  useEffect(() => {
+  const filteredProducts = useMemo(() => {
     let result = [...products];
 
     // 1. Category Filter
@@ -136,7 +136,7 @@ export default function Products() {
       result.sort((a, b) => String(a?.name || '').localeCompare(String(b?.name || '')));
     }
 
-    setFilteredProducts(result);
+    return result;
   }, [products, categoryFilter, searchQuery, selectedBrand, sortBy]);
 
   // Handle category tab click

@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { Home, Package, ClipboardList, User, ShoppingCart } from 'lucide-react';

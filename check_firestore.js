@@ -23,13 +23,8 @@ async function run() {
     const packQuantity = parseInt(product?.packQuantity) || 12;
     const stockQty = product?.stockQty !== undefined ? product.stockQty : (product?.stock !== undefined ? product.stock : 0);
 
-    let availablePacks = 0;
     const isPack = wholesaleUnit.includes('pack') || wholesaleUnit.includes('box');
-    if (isPack) {
-      availablePacks = Math.floor(stockQty / packQuantity);
-    } else {
-      availablePacks = stockQty;
-    }
+    const availablePacks = isPack ? Math.floor(stockQty / packQuantity) : stockQty;
 
     console.log(`Product: ${product.name} (${product.id})`);
     console.log(` - wholesaleUnit raw: ${product.wholesaleUnit}`);
