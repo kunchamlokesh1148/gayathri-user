@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MapPin, Search, Navigation, X, Check, Loader2, Compass, AlertCircle, ShieldCheck } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress, isSiddipetUrbanLocation, SIDDIPET_URBAN_CENTER, MAX_DELIVERY_RADIUS_KM } from '../services/db';
 
@@ -443,4 +443,3 @@ export default function LocationPickerModal({
     </div>
   );
 }
-

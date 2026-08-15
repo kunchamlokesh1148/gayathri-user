@@ -1,4 +1,4 @@
-﻿import { db, isFirebaseActive } from './firebase';
+import { db, isFirebaseActive } from './firebase';
 import {
   collection,
   doc,
@@ -577,6 +577,5 @@ export const getCategories = async () => {
   }
   return JSON.parse(localStorage.getItem('wholesale_categories')) || [];
 };
-
 
 

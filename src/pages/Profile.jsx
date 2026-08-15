@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Store, User, Phone, Save, Edit3, X, CheckCircle2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -715,4 +715,3 @@ export default function Profile() {
     </div>
   );
 }
-

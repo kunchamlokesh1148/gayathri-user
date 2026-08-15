@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MapPin, Navigation, ExternalLink, Layers, Car, Store } from 'lucide-react';
 
 const MAP_STYLE = [
@@ -341,4 +341,3 @@ export default function GoogleMapView({
     </div>
   );
 }
-

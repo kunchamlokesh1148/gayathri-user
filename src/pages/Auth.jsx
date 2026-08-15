@@ -1,9 +1,10 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Store, Lock, Eye, EyeOff, User, Phone, Mail } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress, isSiddipetUrbanLocation } from '../services/db';
 import LocationPickerModal from '../components/LocationPickerModal';
+import flashgAuthBg from '../assets/flashg_auth_bg.jpg';
 
 /**
  * Maps any Firebase auth error code/message to a professional user-friendly string.
@@ -394,21 +395,16 @@ export default function Auth() {
 
   return (
     <div className="min-h-[85vh] w-full flex items-center justify-center relative overflow-hidden px-4 py-8 lg:py-16">
-      {/* Background Video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
+      {/* High Quality Modern Supermarket Background Image */}
+      <img
+        src={flashgAuthBg}
+        alt="FLASH-G Wholesale Background"
         className="fixed inset-0 w-full h-full object-cover z-[-20]"
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-      >
-        <source src="https://res.cloudinary.com/dns2zotrw/video/upload/Create_a_second_cinematic__ja10uc.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      />
 
-      {/* Subtle Dark Overlay */}
-      <div className="fixed inset-0 bg-black/45 z-[-10]" />
+      {/* Subtle Overlay */}
+      <div className="fixed inset-0 bg-gradient-to-r from-black/40 via-black/25 to-black/40 z-[-10]" />
       
       {/* 2-Column Foreground Grid Layer */}
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-20">
@@ -903,4 +899,3 @@ export default function Auth() {
     </div>
   );
 }
-
