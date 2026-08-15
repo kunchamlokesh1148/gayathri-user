@@ -394,27 +394,107 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-end relative overflow-hidden px-4 py-8 lg:py-16">
-      {/* Exact Widescreen Background Image From Reference Mockup */}
+    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden px-4 py-8 lg:py-16">
+      {/* Clean Supermarket Warehouse Background Image */}
       <img
-        src={flashgUserLoginBg}
-        alt="FLASH-G Wholesale Partner Hero"
+        src={flashgAuthBg}
+        alt="FLASH-G Wholesale Background"
         className="fixed inset-0 w-full h-full object-cover z-[-20]"
         style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
       />
 
-      {/* Right Column: Card Box Overlay */}
-      <div className="w-full max-w-sm mx-auto lg:mr-12 lg:ml-auto relative z-20 my-auto animate-card-entry">
-        <div className="bg-white rounded-[32px] shadow-2xl border border-emerald-100 overflow-hidden flex flex-col transition-all duration-300 animate-float-card">
+      {/* Soft Dark Vignette Overlay for Depth */}
+      <div className="fixed inset-0 bg-black/20 z-[-10]" />
+
+      {/* 2-Column Foreground Grid Layer */}
+      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center relative z-20">
+        
+        {/* Left Column: Crisp High-Contrast Branding & Features */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 select-none relative z-20 order-1 lg:max-w-xl mx-auto lg:mx-0">
           
-          {/* Header Branding */}
-          <div className="bg-[#008055] p-5 text-white text-center">
-            <div className="inline-flex p-2.5 bg-[#006644] rounded-full mb-2.5 border-2 border-yellow-400 shadow-md">
-              <Store className="h-6 w-6 text-yellow-400" />
+          {/* Logo & Subtitle Card Container */}
+          <div className="flex flex-col items-center lg:items-start space-y-4 w-full bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-[32px] border border-emerald-100 shadow-xl">
+            
+            {/* Cart & Leaf Logo Icon */}
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center bg-emerald-50 rounded-2xl p-2 shadow-inner border border-emerald-200">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                {/* Yellow Arched Swosh */}
+                <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#eab308" strokeWidth="6" strokeLinecap="round" />
+                {/* Shopping Cart Icon */}
+                <g stroke="#047857" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 22 32 L 34 32 L 44 65 L 76 65 L 86 42 L 37 42" />
+                  <circle cx="48" cy="76" r="4.5" fill="#047857" />
+                  <circle cx="72" cy="76" r="4.5" fill="#047857" />
+                </g>
+                {/* Leaves emblem */}
+                <path d="M 75 22 Q 85 18 85 28 Q 75 32 75 22 Z" fill="#15803d" />
+                <path d="M 82 18 Q 92 16 90 24 Q 82 26 82 18 Z" fill="#16a34a" />
+              </svg>
             </div>
-            <h2 className="text-xl font-black tracking-tight animate-fade-in-up font-outfit">FLASH-G Partner Portal</h2>
-            <p className="text-xs text-emerald-100 mt-1 font-medium animate-fade-in-up">Browse, order, and track for your store</p>
+
+            {/* Brand Title: Bright Vibrant Orange / Green */}
+            <h1 className="text-5xl sm:text-6xl font-black text-[#f97316] tracking-tight uppercase font-outfit drop-shadow-md">
+              FLASH-G
+            </h1>
+
+            {/* Subtitle Badge */}
+            <div className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-black text-[#047857] bg-emerald-100/90 px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-200 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-[#047857]" />
+              <span>WHOLESALE PARTNER</span>
+              <span className="h-2 w-2 rounded-full bg-[#047857]" />
+            </div>
+
+            {/* Tagline */}
+            <p className="text-sm sm:text-base font-bold text-gray-800 font-sans">
+              Smart Wholesale. Stronger Together.
+            </p>
           </div>
+
+          {/* 4 Feature Badges */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
+            <div className="flex flex-col items-center p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-emerald-100 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-[#047857] mb-1.5">
+                <Package className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-black text-gray-800 uppercase leading-tight">BULK ORDERS<br/>MADE EASY</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-emerald-100 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-[#047857] mb-1.5">
+                <Tag className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-black text-gray-800 uppercase leading-tight">BEST WHOLESALE<br/>PRICES</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-emerald-100 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-[#047857] mb-1.5">
+                <Truck className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-extrabold text-gray-800 uppercase leading-tight">FAST & RELIABLE<br/>DELIVERY</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-emerald-100 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center text-[#047857] mb-1.5">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-black text-gray-800 uppercase leading-tight">TRUSTED BY<br/>PARTNERS</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Right Column: Card Box Overlay */}
+        <div className="w-full max-w-sm mx-auto lg:mr-0 lg:ml-auto relative z-20 my-auto order-2">
+          <div className="bg-white rounded-[32px] shadow-2xl border border-emerald-100 overflow-hidden flex flex-col transition-all duration-300 animate-float-card">
+            
+            {/* Header Branding */}
+            <div className="bg-[#008055] p-5 text-white text-center">
+              <div className="inline-flex p-2.5 bg-[#006644] rounded-full mb-2.5 border-2 border-yellow-400 shadow-md">
+                <Store className="h-6 w-6 text-yellow-400" />
+              </div>
+              <h2 className="text-xl font-black tracking-tight animate-fade-in-up font-outfit">FLASH-G Partner Portal</h2>
+              <p className="text-xs text-emerald-100 mt-1 font-medium animate-fade-in-up">Browse, order, and track for your store</p>
+            </div>
 
           {/* Tab Selection */}
           <div className="flex border-b border-gray-100">
