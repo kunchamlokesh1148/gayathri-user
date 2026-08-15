@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -35,7 +35,7 @@ export default function Navbar({ onHelpClick }) {
           <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
             <Store className="h-8 w-8 text-white" />
             <span className="font-extrabold text-lg sm:text-xl tracking-tight">
-              FLASH-G <span className="text-yellow-400">Cutmit</span>
+              FLASH-G <span className="text-yellow-400"></span>
             </span>
           </Link>
 
@@ -168,3 +168,4 @@ export default function Navbar({ onHelpClick }) {
     </header>
   );
 }
+

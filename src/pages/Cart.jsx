@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -48,7 +48,7 @@ export default function Cart() {
     const lon = user.deliveryAddress?.longitude;
     const urbanCheck = isSiddipetUrbanLocation(lat, lon, user.deliveryAddress || { fullAddress: user.address });
     if (!urbanCheck.isUrban) {
-      setError('Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet Urban.');
+      setError('Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet Urban.');
       return;
     }
 
@@ -292,3 +292,4 @@ export default function Cart() {
     </div>
   );
 }
+

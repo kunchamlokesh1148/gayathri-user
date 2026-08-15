@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { MapPin, Search, Navigation, X, Check, Loader2, Compass, AlertCircle, ShieldCheck } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress, isSiddipetUrbanLocation, SIDDIPET_URBAN_CENTER, MAX_DELIVERY_RADIUS_KM } from '../services/db';
 
@@ -390,7 +390,7 @@ export default function LocationPickerModal({
               <div className="flex-1">
                 <h5 className="text-xs font-black text-red-900 tracking-tight">Not Available in Your Location</h5>
                 <p className="text-[11px] text-red-700 font-semibold leading-relaxed mt-0.5">
-                  Sorry! FLASH-G Cutmit currently delivers only within a <strong>5km radius</strong> of Siddipet Urban. Please select a location inside Siddipet Urban.
+                  Sorry! FLASH-G currently delivers only within a <strong>5km radius</strong> of Siddipet Urban. Please select a location inside Siddipet Urban.
                 </p>
               </div>
             </div>
@@ -443,3 +443,4 @@ export default function LocationPickerModal({
     </div>
   );
 }
+

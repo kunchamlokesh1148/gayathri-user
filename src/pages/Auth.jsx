@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Store, Lock, Eye, EyeOff, User, Phone, Mail } from 'lucide-react';
@@ -132,7 +132,7 @@ export default function Auth() {
           const distance = getDistanceInKm(latitude, longitude, SIDDIPET_CENTER_LAT, SIDDIPET_CENTER_LON);
           
           if (distance > 5) {
-            setError("Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet town center.");
+            setError("Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet town center.");
             setAddressDetails(null);
             setGpsLoading(false);
             return;
@@ -155,7 +155,7 @@ export default function Auth() {
           
           const urbanCheck = isSiddipetUrbanLocation(latitude, longitude, { fullAddress: fullAddr, street, area, pincode });
           if (!urbanCheck.isUrban) {
-            setError("Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet Urban.");
+            setError("Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet Urban.");
             setGpsLoading(false);
             return;
           }
@@ -216,7 +216,7 @@ export default function Auth() {
 
       const urbanCheck = isSiddipetUrbanLocation(lat, lon, { fullAddress: fullAddr, street, area, pincode });
       if (!urbanCheck.isUrban) {
-        setError("Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet Urban.");
+        setError("Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet Urban.");
         setGpsLoading(false);
         return;
       }
@@ -434,16 +434,6 @@ export default function Auth() {
               }}
             >
               FLASH-G
-            </div>
-            <div 
-              className="text-6xl sm:text-8xl lg:text-9xl text-[#581c87] leading-none opacity-0 animate-cutmit-text"
-              style={{ 
-                fontFamily: "'Lobster', cursive",
-                animationDelay: '0.4s',
-                textShadow: '0 4px 15px rgba(255, 255, 255, 0.95), 0 2px 6px rgba(255, 255, 255, 0.9)'
-              }}
-            >
-              Cutmit
             </div>
           </div>
         </div>
@@ -913,3 +903,4 @@ export default function Auth() {
     </div>
   );
 }
+

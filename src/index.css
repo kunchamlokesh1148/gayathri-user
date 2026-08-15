@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lobster&family=Montserrat:wght@400;500;600;700;800;900&family=Mr+De+Haviland&family=Playfair+Display:ital,wght@0,750;1,750&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lobster&family=Montserrat:wght@400;500;600;700;800;900&family=Mr+De+Haviland&family=Playfair+Display:ital,wght@0,750;1,750&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -217,7 +217,7 @@ body.login-bg {
   to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes cutmitEntry {
+@keyframes Entry {
   from { opacity: 0; transform: translateY(35px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -285,8 +285,8 @@ body.login-bg {
   animation: gayatriEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-cutmit-text {
-  animation: cutmitEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate--text {
+  animation: Entry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .gradient-shine-text {
@@ -403,3 +403,4 @@ body.login-bg {
 .mobile-stitch-container > *:nth-child(6) { animation-delay: 300ms; }
 .mobile-stitch-container > *:nth-child(7) { animation-delay: 350ms; }
 .mobile-stitch-container > *:nth-child(8) { animation-delay: 400ms; }
+

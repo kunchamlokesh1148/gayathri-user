@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { MapPin, Navigation, ExternalLink, Layers, Car, Store } from 'lucide-react';
 
 const MAP_STYLE = [
@@ -45,7 +45,7 @@ export default function GoogleMapView({
   title = "Delivery Location",
   originLat = null,
   originLng = null,
-  originTitle = "FLASH-G Cutmit Store",
+  originTitle = "FLASH-G Store",
   height = "240px",
   zoom = 15,
   showExternalButton = true,
@@ -341,3 +341,4 @@ export default function GoogleMapView({
     </div>
   );
 }
+

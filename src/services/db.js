@@ -1,4 +1,4 @@
-import { db, isFirebaseActive } from './firebase';
+﻿import { db, isFirebaseActive } from './firebase';
 import {
   collection,
   doc,
@@ -530,7 +530,7 @@ export const isSiddipetUrbanLocation = (latitude, longitude, addressData = {}) =
     distanceKm: distanceKm ? parseFloat(distanceKm.toFixed(2)) : null,
     message: isUrban
       ? null
-      : "Not available in your location. FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet Urban."
+      : "Not available in your location. FLASH-G currently delivers only within a 5km radius of Siddipet Urban."
   };
 };
 
@@ -577,5 +577,6 @@ export const getCategories = async () => {
   }
   return JSON.parse(localStorage.getItem('wholesale_categories')) || [];
 };
+
 
 

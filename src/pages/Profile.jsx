@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Store, User, Phone, Save, Edit3, X, CheckCircle2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -80,7 +80,7 @@ export default function Profile() {
           const distance = getDistanceInKm(latitude, longitude, SIDDIPET_CENTER_LAT, SIDDIPET_CENTER_LON);
           
           if (distance > 5) {
-            setError("Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet town center.");
+            setError("Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet town center.");
             setAddressDetails(null);
             setGpsLoading(false);
             return;
@@ -103,7 +103,7 @@ export default function Profile() {
           
           const urbanCheck = isSiddipetUrbanLocation(latitude, longitude, { fullAddress: fullAddr, street, area, pincode });
           if (!urbanCheck.isUrban) {
-            setError("Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet Urban.");
+            setError("Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet Urban.");
             setGpsLoading(false);
             return;
           }
@@ -164,7 +164,7 @@ export default function Profile() {
 
       const urbanCheck = isSiddipetUrbanLocation(lat, lon, { fullAddress: fullAddr, street, area, pincode });
       if (!urbanCheck.isUrban) {
-        setError("Sorry! FLASH-G Cutmit currently delivers only within a 5km radius of Siddipet Urban.");
+        setError("Sorry! FLASH-G currently delivers only within a 5km radius of Siddipet Urban.");
         setGpsLoading(false);
         return;
       }
@@ -715,3 +715,4 @@ export default function Profile() {
     </div>
   );
 }
+
