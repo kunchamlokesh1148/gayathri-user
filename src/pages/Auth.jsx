@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { Store, Lock, Eye, EyeOff, User, Phone, Mail, Package, Tag, Truck, ShieldCheck } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress, isSiddipetUrbanLocation } from '../services/db';
 import LocationPickerModal from '../components/LocationPickerModal';
-import flashgUserLoginBg from '../assets/flashg_user_login_bg.png';
+import flashgAuthBg from '../assets/flashg_auth_bg.jpg';
 
 /**
  * Maps any Firebase auth error code/message to a professional user-friendly string.
