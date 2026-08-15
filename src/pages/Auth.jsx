@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { Store, Lock, Eye, EyeOff, User, Phone, Mail, Package, Tag, Truck, ShieldCheck } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress, isSiddipetUrbanLocation } from '../services/db';
 import LocationPickerModal from '../components/LocationPickerModal';
-import flashgHeroBg from '../assets/flashg_hero_bg.png';
+import flashgUserLoginBg from '../assets/flashg_user_login_bg.png';
 
 /**
  * Maps any Firebase auth error code/message to a professional user-friendly string.
@@ -395,9 +395,9 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-end relative overflow-hidden px-4 py-8 lg:py-16">
-      {/* Full Widescreen Widescale Background Image Matching Attached Mockup Exactly */}
+      {/* Exact Widescreen Background Image From Reference Mockup */}
       <img
-        src={flashgHeroBg}
+        src={flashgUserLoginBg}
         alt="FLASH-G Wholesale Partner Hero"
         className="fixed inset-0 w-full h-full object-cover z-[-20]"
         style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
