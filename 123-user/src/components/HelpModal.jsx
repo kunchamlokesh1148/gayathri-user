@@ -92,50 +92,31 @@ export default function HelpModal({ isOpen, onClose }) {
           
           {/* Support Info */}
           <div className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 bg-gray-50 p-4 rounded-[20px] border border-brand/15">
+            <div className="bg-gray-50 p-4 rounded-[20px] border border-brand/15">
               <div className="flex items-center space-x-3">
-                <div className="h-9 w-9 rounded-xl bg-brand-light text-brand flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase tracking-wider font-extrabold text-gray-400">Mobile Support</p>
-                  <a href="tel:+919247221802" className="text-sm font-bold text-gray-800 hover:text-brand transition">
-                    +91 9247221802
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 border-t sm:border-t-0 sm:border-l border-gray-200 pt-3 sm:pt-0 sm:pl-3.5">
                 <div className="h-9 w-9 rounded-xl bg-accent-light text-accent flex items-center justify-center flex-shrink-0">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-wider font-extrabold text-gray-400">Email Support</p>
-                  <a href="mailto:contact@flash-g.com" className="text-sm font-bold text-gray-800 hover:text-accent transition break-all">
-                    contact@flash-g.com
+                  <a href="mailto:garipallynagaharsha7@gmail.com" className="text-sm font-bold text-gray-800 hover:text-accent transition break-all">
+                    garipallynagaharsha7@gmail.com
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <a
-                href="tel:+919247221802"
-                className="flex items-center justify-center gap-1.5 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-full text-[11px] font-black shadow-sm hover:shadow-md transition-all text-center cursor-pointer active-bounce"
-              >
-                <Phone className="h-3.5 w-3.5" />
-                Call Now
-              </a>
-              <a
-                href="mailto:contact@flash-g.com"
+                href="mailto:garipallynagaharsha7@gmail.com"
                 className="flex items-center justify-center gap-1.5 py-2.5 bg-accent hover:bg-accent-dark text-white rounded-full text-[11px] font-black shadow-sm hover:shadow-md transition-all text-center cursor-pointer active-bounce"
               >
                 <Mail className="h-3.5 w-3.5" />
                 Send Email
               </a>
               <a
-                href="https://wa.me/919247221802"
+                href="https://wa.me/919032725114"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 py-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full text-[11px] font-black shadow-sm hover:shadow-md transition-all text-center cursor-pointer active-bounce"
