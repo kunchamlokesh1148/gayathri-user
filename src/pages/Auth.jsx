@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Store, Lock, Eye, EyeOff, User, Phone, Mail } from 'lucide-react';
+import { Store, Lock, Eye, EyeOff, User, Phone, Mail, Package, Tag, Truck, ShieldCheck } from 'lucide-react';
 import { reverseGeocode, geocodeManualAddress, isSiddipetUrbanLocation } from '../services/db';
 import LocationPickerModal from '../components/LocationPickerModal';
 import flashgAuthBg from '../assets/flashg_auth_bg.jpg';
@@ -409,29 +409,78 @@ export default function Auth() {
       {/* 2-Column Foreground Grid Layer */}
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-20">
         
-        {/* Left Column: Welcome Branding */}
-        <div className="flex flex-col justify-center text-center lg:text-left space-y-6 select-none relative z-20 order-1 lg:max-w-xl">
-          <h1 
-            className="text-4xl sm:text-5xl lg:text-6xl text-[#854d0e] lowercase tracking-wide font-black opacity-0 animate-welcome-text"
-            style={{ 
-              fontFamily: "'Lobster', cursive",
-              textShadow: '0 2px 10px rgba(255, 255, 255, 0.95), 0 1px 4px rgba(255, 255, 255, 0.9)'
-            }}
-          >
-            Welcome to
-          </h1>
-          <div className="space-y-3">
-            <div 
-              className="text-6xl sm:text-8xl lg:text-9xl text-[#ea580c] leading-none opacity-0 animate-gayatri-text"
-              style={{ 
-                fontFamily: "'Lobster', cursive",
-                animationDelay: '0.2s',
-                textShadow: '0 4px 15px rgba(255, 255, 255, 0.95), 0 2px 6px rgba(255, 255, 255, 0.9)'
-              }}
-            >
+        {/* Left Column: Branding & Features */}
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 select-none relative z-20 order-1 lg:max-w-xl mx-auto lg:mx-0">
+          
+          {/* Logo & Subtitle Section */}
+          <div className="flex flex-col items-center lg:items-start space-y-3 w-full">
+            
+            {/* Cart & Leaf Logo Icon */}
+            <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-white/90 backdrop-blur-md rounded-3xl p-3 shadow-lg border border-emerald-100/80 mb-1">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                {/* Yellow Arched Swosh */}
+                <path d="M 15 50 A 35 35 0 0 1 85 50" fill="none" stroke="#eab308" strokeWidth="6" strokeLinecap="round" />
+                {/* Shopping Cart Icon */}
+                <g stroke="#047857" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 22 32 L 34 32 L 44 65 L 76 65 L 86 42 L 37 42" />
+                  <circle cx="48" cy="76" r="4.5" fill="#047857" />
+                  <circle cx="72" cy="76" r="4.5" fill="#047857" />
+                </g>
+                {/* Leaves emblem */}
+                <path d="M 75 22 Q 85 18 85 28 Q 75 32 75 22 Z" fill="#15803d" />
+                <path d="M 82 18 Q 92 16 90 24 Q 82 26 82 18 Z" fill="#16a34a" />
+              </svg>
+            </div>
+
+            {/* Brand Title */}
+            <h1 className="text-5xl sm:text-6xl font-black text-[#047857] tracking-tight uppercase font-outfit drop-shadow-sm">
               FLASH-G
+            </h1>
+
+            {/* Subtitle Line */}
+            <div className="flex items-center justify-center lg:justify-start gap-3 text-xs sm:text-sm font-black text-[#047857] uppercase tracking-widest w-full">
+              <span className="h-[2px] w-8 bg-[#047857]" />
+              <span>WHOLESALE PARTNER</span>
+              <span className="h-[2px] w-8 bg-[#047857]" />
+            </div>
+
+            {/* Tagline */}
+            <p className="text-sm sm:text-base font-bold text-gray-800 font-sans">
+              Smart Wholesale. Stronger Together.
+            </p>
+          </div>
+
+          {/* 4 Feature Badges */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 w-full">
+            <div className="flex flex-col items-center p-3 bg-white/90 backdrop-blur-md rounded-2xl border border-emerald-100/80 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100/90 flex items-center justify-center text-[#047857] mb-1.5">
+                <Package className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-extrabold text-gray-800 uppercase leading-tight">BULK ORDERS<br/>MADE EASY</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 bg-white/90 backdrop-blur-md rounded-2xl border border-emerald-100/80 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100/90 flex items-center justify-center text-[#047857] mb-1.5">
+                <Tag className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-extrabold text-gray-800 uppercase leading-tight">BEST WHOLESALE<br/>PRICES</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 bg-white/90 backdrop-blur-md rounded-2xl border border-emerald-100/80 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100/90 flex items-center justify-center text-[#047857] mb-1.5">
+                <Truck className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-extrabold text-gray-800 uppercase leading-tight">FAST & RELIABLE<br/>DELIVERY</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 bg-white/90 backdrop-blur-md rounded-2xl border border-emerald-100/80 shadow-md text-center">
+              <div className="w-9 h-9 rounded-full bg-emerald-100/90 flex items-center justify-center text-[#047857] mb-1.5">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <span className="text-[10px] font-extrabold text-gray-800 uppercase leading-tight">TRUSTED BY<br/>PARTNERS</span>
             </div>
           </div>
+
         </div>
 
         {/* Right Column: Card Box */}
